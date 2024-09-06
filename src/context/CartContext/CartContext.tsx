@@ -33,31 +33,17 @@ const CartContext = createContext<CartContextType>({
 });
 
 const CartContextProvider: FC<CartContextProviderProps> = ({ children }) => {
-    // const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    //     if (typeof window !== 'undefined') {
-    //         const storedCart = localStorage.getItem('cartItems');
-    //         return storedCart ? JSON.parse(storedCart) : [];
-    //       }
-    //       return [];
-    // });
-
-    // useEffect(() => {
-    //     //console.log("Saving cart items to localStorage:", cartItems);
-    //     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    // }, [cartItems]);
-
-
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
     const [isMounted, setIsMounted] = useState(false);
-    const [isLoading,setIsLoading] = useState<boolean>(true);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         setIsMounted(true);
-        if (typeof window !== 'undefined') {
-            const storedCart = localStorage.getItem('cartItems');
+        if (typeof window !== "undefined") {
+            const storedCart = localStorage.getItem("cartItems");
             if (storedCart) {
                 setCartItems(JSON.parse(storedCart));
-                setIsLoading(false)
+                setIsLoading(false);
             }
         }
     }, []);
@@ -69,27 +55,21 @@ const CartContextProvider: FC<CartContextProviderProps> = ({ children }) => {
     }, [cartItems, isMounted]);
 
     const addToCart = (item: CartItem) => {
-        setCartItems([...cartItems, { ...item}]);
+        setCartItems([...cartItems, { ...item }]);
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
     };
 
     const removeFromCart = (id: string) => {
-        // Logic to remove item from cart
         setCartItems(cartItems.filter((item) => item.id !== id));
     };
 
-    // const updateCartItem = (id: string, updatedItem: CartItem) => {
-    //     setCartItems(
-    //         cartItems.map((item) => (item.id === id ? updatedItem : item))
-    //     );
-    // };
-
     const updateCartItem = (id: string, updatedItem: CartItem) => {
-        // ... other logic
         setCartItems(
-          cartItems.map((item) => (item.id === id ? { ...updatedItem } : item))
+            cartItems.map((item) =>
+                item.id === id ? { ...updatedItem } : item
+            )
         );
-      };
+    };
 
     const clearCart = () => {
         setCartItems([]);
@@ -103,7 +83,7 @@ const CartContextProvider: FC<CartContextProviderProps> = ({ children }) => {
                 removeFromCart,
                 updateCartItem,
                 clearCart,
-                isLoading
+                isLoading,
             }}
         >
             {children}

@@ -1,74 +1,18 @@
-import {
-    ArrowDownIcon,
-    ArrowRightIcon,
-    ArrowUpIcon,
-    CheckCircledIcon,
-    CircleIcon,
-    CrossCircledIcon,
-    QuestionMarkCircledIcon,
-    StopwatchIcon,
-  } from "@radix-ui/react-icons"
-  
-  export const labels = [
+export const statuses = [
     {
-      value: "bug",
-      label: "Bug",
+        value: "rocking-chair",
+        label: "Rocking chair",
     },
     {
-      value: "feature",
-      label: "Feature",
+        value: "side-chair",
+        label: "Side chair",
     },
     {
-      value: "documentation",
-      label: "Documentation",
-    },
-  ]
-  
-  export const statuses = [
-    {
-      value: "spices",
-      label: "Spices",
+        value: "lounge-chair",
+        label: "Lounge chair",
     },
     {
-      value: "salt_sugar",
-      label: "Salt & Sugar",
+        value: "others",
+        label: "Others",
     },
-    {
-      value: "oil",
-      label: "Oil",
-    },
-    {
-      value: "rice",
-      label: "Rice",
-    },
-    {
-      value: "dal",
-      label: "Dal",
-    },
-    {
-      value: "readymix",
-      label: "Readymix",
-    },
-    {
-      value: "shemai_suji",
-      label: "Shemai & Suji",
-    },
-  ]
-  
-  export const priorities = [
-    {
-      label: "Low",
-      value: "low",
-      icon: ArrowDownIcon,
-    },
-    {
-      label: "Medium",
-      value: "medium",
-      icon: ArrowRightIcon,
-    },
-    {
-      label: "High",
-      value: "high",
-      icon: ArrowUpIcon,
-    },
-  ]
+];

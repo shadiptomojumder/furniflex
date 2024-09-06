@@ -132,13 +132,6 @@ const ViewProductModal = ({
                         {productData?.productDescription}
                     </h2>
 
-                    {/* <Label className="text-base font-semibold sm:col-span-4 col-span-6 flex items-center justify-between">
-                        Product Created at<span>:</span>
-                    </Label>
-                    <h2 className="sm:col-span-6 col-span-4 text-gray-900 font-medium text-base text-start">
-                        {format(productData?.createdAt, "dd MMMM yyyy")}
-                    </h2> */}
-
                     <Label className="text-base font-semibold sm:col-span-4 col-span-6 flex items-center justify-between">
                         Product Stock<span>:</span>
                     </Label>
@@ -154,20 +147,11 @@ const ViewProductModal = ({
                             >
                                 <Minus />
                             </div>
-                            {/* <MinusCircle
-                            onClick={() =>
-                                {setStock(stock > 0 ? stock - 1 : stock);setIsTouched(true)}
-                            }
-                            className="text-primary cursor-pointer"
-                        /> */}
+
                             <p className="text-gray-900 line-clamp-2 font-medium text-base border-2 bg-slate-200 rounded-md px-1">
                                 {stock}
                             </p>
-                            {/* <Minus /> */}
-                            {/* <CirclePlus
-                            onClick={() => {setStock(stock + 1);setIsTouched(true)}}
-                            className="text-primary cursor-pointer"
-                        /> */}
+
                             <div
                                 onClick={() => {
                                     setStock(stock + 1);
@@ -180,52 +164,46 @@ const ViewProductModal = ({
                         </div>
 
                         <div className="flex items-center gap-2 flex-wrap">
-                        <div
-                            onClick={() => {
-                                setStock(stock + 10);
-                                setIsTouched(true);
-                            }}
-                            className="text-primary px-1 flex justify-center items-center cursor-pointer border-2 border-primary rounded-md"
-                        >
-                            10+
-                        </div>
-                        <div
-                            onClick={() => {
-                                setStock(stock + 20);
-                                setIsTouched(true);
-                            }}
-                            className="text-primary px-1 flex justify-center items-center cursor-pointer border-2 border-primary rounded-md"
-                        >
-                            20+
-                        </div>
-                        <div
-                            onClick={() => {
-                                setStock(stock + 100);
-                                setIsTouched(true);
-                            }}
-                            className="text-primary px-1 flex justify-center items-center cursor-pointer border-2 border-primary rounded-md"
-                        >
-                            100+
-                        </div>
+                            <div
+                                onClick={() => {
+                                    setStock(stock + 10);
+                                    setIsTouched(true);
+                                }}
+                                className="text-primary px-1 flex justify-center items-center cursor-pointer border-2 border-primary rounded-md"
+                            >
+                                10+
+                            </div>
+                            <div
+                                onClick={() => {
+                                    setStock(stock + 20);
+                                    setIsTouched(true);
+                                }}
+                                className="text-primary px-1 flex justify-center items-center cursor-pointer border-2 border-primary rounded-md"
+                            >
+                                20+
+                            </div>
+                            <div
+                                onClick={() => {
+                                    setStock(stock + 100);
+                                    setIsTouched(true);
+                                }}
+                                className="text-primary px-1 flex justify-center items-center cursor-pointer border-2 border-primary rounded-md"
+                            >
+                                100+
+                            </div>
                         </div>
                     </section>
                 </section>
 
                 <DialogFooter className="gap-4">
                     <DialogClose asChild>
-                        <Button
-                            type="button"
-                            variant="secondary"
-                            onClick={handleClose}
-                        >
+                        <Button variant={"outline"} onClick={handleClose}>
                             Close
                         </Button>
                     </DialogClose>
                     <Button
-                        type="submit"
                         onClick={handleChanges}
                         disabled={isPending || !isTouched}
-                        className="hover:bg-primary"
                     >
                         {" "}
                         {isPending ? (

@@ -9,7 +9,7 @@ const DashboardProductsPage = () => {
 
 
     const { isLoading, data: productlist } = useQuery({
-        queryKey: ["productlist", "","newest"],
+        queryKey: ["productlist", "","newest",],
         queryFn: GetAllProducts,
     });
 

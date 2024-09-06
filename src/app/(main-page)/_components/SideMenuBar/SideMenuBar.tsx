@@ -45,7 +45,7 @@ const SideMenuBar = () => {
     }, [categoryQuery, pathname, router]);
 
     return (
-        <section className="bg-white pr-8 pt-10 border-r">
+        <section className="bg-white pr-8 pt-10 border-r sm:block hidden">
             <div className="flex flex-col gap-4">
                 {FilterItems.map((item: any, index: number) => {
                     const isActive = item?.filter === category

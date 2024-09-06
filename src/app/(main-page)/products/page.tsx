@@ -1,7 +1,5 @@
 "use client";
-import GetAllProducts, {
-    GetProductByQuery,
-} from "@/api/product/getAllProducts";
+import { GetProductByQuery } from "@/api/product/getAllProducts";
 import {
     Pagination,
     PaginationContent,
@@ -10,29 +8,26 @@ import {
     PaginationLink,
 } from "@/components/ui/pagination";
 import { ProductType } from "@/types/product.type";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProductCard from "../_components/ProductCard/ProductCard";
 import ProductCartCardLoading from "../_components/ProductCardLoading/ProductCardLoading";
 
 const ProductPage = () => {
-    const searchPrams = useSearchParams();
-    const category = searchPrams.get("category") || "";
+    const searchParams = useSearchParams();
+    const router = useRouter();
 
-    console.log("searchPrams is", searchPrams);
-    console.log("sortBy is", category);
-    // const { data, error } = useQuery({
-    //     queryKey: ["productlist", "", ""],
-    //     queryFn: GetAllProducts,
-    // });
+    // Get the category from the URL query params
+    const category = searchParams.get("category") || "";
 
-    // Set up state for pagination
-    const [currentPage, setCurrentPage] = useState(1); // Start on page 1
-    const itemsPerPage = 6; // Number of items per page
-    console.log("currentPage is:",currentPage);
-    
+    // Set up initial state for pagination
+    const [currentPage, setCurrentPage] = useState(() => {
+        const pageParam = searchParams.get("page");
+        return pageParam ? parseInt(pageParam) : 1;
+    });
+    const itemsPerPage = 3; // Number of items per page
 
     const { isLoading, data: responseData } = useQuery({
         queryKey: [
@@ -40,33 +35,46 @@ const ProductPage = () => {
             {
                 queryFilter: {
                     category: category,
-                    sortBy: "desc",
-                    page: currentPage, // Pass current page
-                    limit: itemsPerPage, // Pass limit (items per page)
+                    page: currentPage,
+                    limit: itemsPerPage,
                 },
             },
         ],
         queryFn: GetProductByQuery,
+        placeholderData: keepPreviousData,
     });
     const productList = responseData?.data || [];
     const paginationData = responseData?.pagination || {
         totalPages: 2,
         currentPage: 1,
     };
-    console.log("queryProductList is:", productList);
-    console.log("paginationData is:", paginationData);
 
     // Handle page change
     const handlePageChange = (newPage: number) => {
-        setCurrentPage(newPage); // Update current page
+        if (newPage > 0 && newPage <= paginationData.totalPages) {
+            setCurrentPage(newPage);
+        }
     };
-    useEffect(()=>{
+    
+    // Update URL query parameters when category or page changes
+    useEffect(() => {
+        const params = new URLSearchParams();
+        if (category) {
+            params.set("category", category);
+        }
+
+        params.set("page", currentPage.toString());
+
+        router.push(`/products?${params.toString()}`);
+    }, [category, currentPage, router, searchParams]);
+
+    useEffect(() => {
         setCurrentPage(1);
-    },[category])
+    }, [category]);
 
     return (
         <section>
-            <div className="grid grid-cols-3 gap-8 mb-10">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-8 mb-10">
                 {isLoading ? (
                     <>
                         {Array.from({ length: 6 }, (_, index) => (
@@ -90,7 +98,7 @@ const ProductPage = () => {
                     {/* Previous Page Button */}
                     <PaginationItem>
                         <button
-                        disabled={currentPage === 1}
+                            disabled={currentPage === 1}
                             onClick={() => handlePageChange(currentPage - 1)}
                             className={`w-[36px] h-[36px]  ${currentPage === 1 ? "bg-[#DADADA]" : "bg-white border-2 cursor-pointer"}  rounded flex justify-center items-center`}
                         >

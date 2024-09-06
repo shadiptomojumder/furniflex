@@ -126,42 +126,42 @@ export const columns: ColumnDef<ProductDataType>[] = [
             <DataTableColumnHeader column={column} title="Stock" />
         ),
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("productStock")}</div>
+            <div className="capitalize font-bold text-center">{row.getValue("productStock")}</div>
         ),
     },
-    {
-        id: "productStock",
-        accessorKey: "productStock",
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Status" />
-        ),
-        cell: ({ row }) => {
-            const productStock = row.getValue("productStock") as number;
-            console.log("status", productStock);
+    // {
+    //     id: "productStock",
+    //     accessorKey: "productStock",
+    //     header: ({ column }) => (
+    //         <DataTableColumnHeader column={column} title="Status" />
+    //     ),
+    //     cell: ({ row }) => {
+    //         const productStock = row.getValue("productStock") as number;
+    //         console.log("status", productStock);
 
-            return (
-                <>
-                    {productStock > 0 && (
-                        <Badge variant="default" className="hover:bg-green-500">
-                            In Stock
-                        </Badge>
-                    )}
+    //         return (
+    //             <>
+    //                 {productStock > 0 && (
+    //                     <Badge variant="default" className="hover:bg-green-500">
+    //                         In Stock
+    //                     </Badge>
+    //                 )}
 
-                    {productStock === 0 && (
-                        <Badge
-                            variant="default"
-                            className="bg-[#FFE569] hover:bg-[#FFE569] text-center"
-                        >
-                            Out of Stock
-                        </Badge>
-                    )}
-                </>
-            );
-        },
-        filterFn: (row, status, value) => {
-            return value.includes(row.getValue(status));
-        },
-    },
+    //                 {productStock === 0 && (
+    //                     <Badge
+    //                         variant="default"
+    //                         className="bg-[#4e440f] hover:bg-[#62561d] text-center"
+    //                     >
+    //                         Out of Stock
+    //                     </Badge>
+    //                 )}
+    //             </>
+    //         );
+    //     },
+    //     filterFn: (row, status, value) => {
+    //         return value.includes(row.getValue(status));
+    //     },
+    // },
     {
         id: "actions",
         enableHiding: false,

@@ -1,9 +1,10 @@
 "use client";
 import ProductCartCard from "@/app/components/ProductCartCard/ProductCartCard";
 import ProductCartCardLoading from "@/app/components/ProductCartCardLoading/ProductCartCardLoading";
+import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useCart } from "@/hooks/useCart";
-import { PiEmptyBold } from "react-icons/pi";
+import { formatEuroCurrency } from "@/lib/formatPrice";
 
 const CartPage = () => {
     const {
@@ -25,15 +26,16 @@ const CartPage = () => {
         return total;
     };
 
+    const totalAmmount = calculateTotal();
+
     return (
         <main className="py-10">
-            <section className="container">
-                <h2 className="text-2xl font-bold text-center py-10">
-                    My Shopping Cart
-                </h2>
-                <section className="grid grid-cols-12 gap-3">
-                    <div className="border-2 rounded-md md:p-5 p-2 md:col-span-8 col-span-12">
-                        {/* <ProductCartCardLoading/> */}
+            <section className="container grid grid-cols-7">
+                <div className="col-span-4">
+                    <h2 className="text-[#1E1E1E] text-[28px] font-semibold mb-10">
+                        An overview of your order
+                    </h2>
+                    <div className="bg-[#FAFAFA] p-6 md:col-span-8 col-span-12 mb-10 rounded-md">
                         {isLoading ? (
                             <>
                                 {Array.from({ length: 2 }, (_, index) => (
@@ -60,47 +62,57 @@ const CartPage = () => {
                                     })}
                             </>
                         ) : (
-                            <>
-                                <p className="text-lg font-semibold text-center">
+                            <div className="h-[270px]">
+                                <p className="text-xl font-semibold text-center">
                                     Your cart is empty
                                 </p>
-                                <PiEmptyBold className="text-gray-300 mx-auto md:mt-8 mt-2 md:text-[150px] text-[70px]"/>
-                            </>
+                            </div>
                         )}
-
-                        {/* <ProductCartCard></ProductCartCard> */}
                     </div>
+                </div>
 
-                    <div className="md:col-span-1 col-span-12"></div>
-                    <div className="border-2 rounded-md p-5 md:col-span-3 col-span-12 space-y-4 h-fit">
-                        <h2 className="text-xl font-bold">Cart Total</h2>
-                        <div className="flex items-center justify-between gap-5 py-2 border-b-2 border-slate-400">
-                            <Label className="text-sm font-semibold text-slate-500">
-                                Subtotal:
+                <div className="col-span-1"></div>
+
+                <div className="col-span-2">
+                    <h2 className="text-[#1E1E1E] text-[28px] font-semibold mb-10">
+                        Oder details
+                    </h2>
+                    <div className="border bg-[#FAFAFA] rounded-[12px] p-6 space-y-3">
+                        <div className="flex items-center justify-between gap-5">
+                            <Label className="text-[20px] font-normal text-[#656565]">
+                                Subtotal
                             </Label>
-                            <p className="text-sm font-bold">
-                                ৳{calculateTotal()}
+                            <p className="text-[20px] font-medium text-[#656565]">
+                                {formatEuroCurrency(totalAmmount)}
                             </p>
                         </div>
-                        <div className="flex items-center justify-between gap-5 py-2 border-b-2 border-slate-400">
-                            <Label className="text-sm font-semibold text-slate-500">
-                                Shipping:
+                        <div className="flex items-center justify-between gap-5">
+                            <Label className="text-[20px] font-normal text-[#656565]">
+                                Shipping
                             </Label>
-                            <p className="text-sm font-bold capitalize">Free</p>
+                            <p className="text-[20px] font-medium text-[#656565]">
+                                Free
+                            </p>
                         </div>
-                        <div className="flex items-center justify-between gap-5 py-2">
-                            <Label className="text-sm font-semibold text-slate-500">
+                        <div className="flex items-center justify-between gap-5 pb-3 border-b">
+                            <Label className="text-[20px] font-normal text-[#656565]">
+                                Estimated Tax
+                            </Label>
+                            <p className="text-[20px] font-medium text-[#656565]">
+                                € -
+                            </p>
+                        </div>
+                        <div className="flex items-center justify-between gap-5">
+                            <Label className="text-2xl font-semibold text-[#656565]">
                                 Total:
                             </Label>
-                            <p className="text-sm font-bold capitalize">
-                                ৳{calculateTotal()}
+                            <p className="text-2xl font-semibold text-[#0E0E0E]">
+                                {formatEuroCurrency(totalAmmount)}
                             </p>
                         </div>
-                        <button className="text-white text-sm font-semibold py-2 flex items-center justify-center shadow-lg rounded-full w-full bg-primary">
-                            Confirm Order
-                        </button>
                     </div>
-                </section>
+                    <Button className="text-[17px] bg-black hover:bg-black font-medium text-white mt-6 w-full h-[56px]">Go to Checkout</Button>
+                </div>
             </section>
         </main>
     );

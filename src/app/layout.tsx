@@ -4,11 +4,8 @@ import TanstackProvider from "@/TanstackProvider/TanstackProvider";
 import type { Metadata } from "next";
 import { Barlow, Inter } from "next/font/google";
 import { Suspense } from "react";
-import Footer from "./components/Footer/Footer";
 
-import Header from "@/components/Header/Header";
 import { CartContextProvider } from "@/context/CartContext/CartContext";
-import CartForMobile from "./components/CartForMobile/CartForMobile";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -33,14 +30,14 @@ export default function RootLayout({
                 <TanstackProvider>
                     <AuthContextProvider>
                         <CartContextProvider>
-                            <Header />
+                            {/* <Header /> */}
                             <Suspense
                                 fallback={<div className="w-dvh h-dvh"></div>}
                             >
                                 {children}
                             </Suspense>
-                            <Footer />
-                            <CartForMobile></CartForMobile>
+                            {/* <Footer /> */}
+                            {/* <CartForMobile></CartForMobile> */}
                             <Toaster richColors />
                         </CartContextProvider>
                     </AuthContextProvider>
