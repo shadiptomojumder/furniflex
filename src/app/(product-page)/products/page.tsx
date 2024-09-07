@@ -27,7 +27,7 @@ const ProductPage = () => {
         const pageParam = searchParams.get("page");
         return pageParam ? parseInt(pageParam) : 1;
     });
-    const itemsPerPage = 3; // Number of items per page
+    const itemsPerPage = 6; // Number of items per page
 
     const { isLoading, data: responseData } = useQuery({
         queryKey: [
