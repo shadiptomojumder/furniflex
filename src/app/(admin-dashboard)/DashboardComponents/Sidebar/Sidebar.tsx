@@ -1,9 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/hooks/useAuth";
-import { ArrowLeftToLine, Boxes, LayoutList, PackagePlus } from "lucide-react";
+import { Boxes, LayoutList, PackagePlus } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -127,66 +126,56 @@ const Sidebar = () => {
             {/* This is for small screens */}
             <main
                 ref={sideBarRef}
-                className={`px-0 py-10 transition-all lg:hidden md:min-w-[288px] min-w-[150px] flex flex-col justify-between h-[100dvh] z-[500] absolute bg-white border-r-2 ${
+                className={`px-0 py-10 transition-all lg:hidden w-[50dvw] flex flex-col gap-2 h-[100dvh] z-[500] fixed bg-white border-r-2 ${
                     showSideBar ? "top-[0%] left-0" : "top-0 -left-[95%]"
                 }`}
             >
+                <h2 className="text-xl font-semibold px-5 pt-10 pb-4 mb-3 border-b-2 border-primary">
+                    Navigation
+                </h2>
                 {/* All the Links */}
 
-                {userLoading ? (
-                    <section className="space-y-3">
-                        {Array.from({ length: 6 }, (_, index) => (
-                            <Skeleton
-                                key={index}
-                                className="w-full h-[35px] rounded-none bg-gray-300"
-                            />
-                        ))}
-                    </section>
-                ) : (
-                    <>
-                        <section className="space-y-2">
-                            {QuickLinks.map((item) => {
-                                const isActive = pathname === item.link;
-                                return (
-                                    <Link
-                                        onClick={() => setShowSideBar(false)}
-                                        href={`${item.link}`}
-                                        key={item.id}
-                                        className="block"
-                                    >
+                <section className="space-y-2">
+                    {QuickLinks.map((item) => {
+                        const isActive = pathname === item.link;
+                        return (
+                            <Link
+                                onClick={() => setShowSideBar(false)}
+                                href={`${item.link}`}
+                                key={item.id}
+                                className="block"
+                            >
+                                <div
+                                    className={
+                                        isActive
+                                            ? "py-2 px-4 cursor-pointer flex items-center gap-2 bg-primary-foreground border-l-2 border-primary hover:text-primary transition-all ease-in-out duration-300"
+                                            : "py-2 px-4 cursor-pointer bg-white group flex items-center gap-2 hover:bg-[#edf2ee] border-l-2 border-transparent hover:border-primary hover:text-primary transition-all ease-in-out duration-300"
+                                    }
+                                >
+                                    {item.icon && (
                                         <div
-                                            className={
-                                                isActive
-                                                    ? "py-2 px-4 cursor-pointer flex items-center gap-2 bg-[#edf2ee] border-l-2 border-primary hover:text-primary transition-all ease-in-out duration-300"
-                                                    : "py-2 px-4 cursor-pointer bg-white group flex items-center gap-2 hover:bg-[#edf2ee] border-l-2 border-transparent hover:border-primary hover:text-primary transition-all ease-in-out duration-300"
-                                            }
+                                            className={`flex items-center gap-2 group-hover:text-primary transition-all ease-in-out duration-300 ${isActive ? "text-primary" : "text-[#040D12]"}`}
                                         >
-                                            {item.icon && (
-                                                <div
-                                                    className={`flex items-center gap-2 group-hover:text-primary transition-all ease-in-out duration-300 ${isActive ? "text-primary" : "text-[#040D12]"}`}
-                                                >
-                                                    {item.icon}
-                                                </div>
-                                            )}
-                                            <h2
-                                                className={
-                                                    isActive
-                                                        ? "text-primary font-semibold capitalize transition-all ease-in-out duration-300"
-                                                        : "text-[#040D12] font-semibold group-hover:text-primary capitalize transition-all ease-in-out duration-300"
-                                                }
-                                            >
-                                                {item.title}
-                                            </h2>
+                                            {item.icon}
                                         </div>
-                                    </Link>
-                                );
-                            })}
-                        </section>
-                    </>
-                )}
+                                    )}
+                                    <h2
+                                        className={
+                                            isActive
+                                                ? "text-primary font-semibold capitalize transition-all ease-in-out duration-300"
+                                                : "text-[#040D12] font-semibold group-hover:text-primary capitalize transition-all ease-in-out duration-300"
+                                        }
+                                    >
+                                        {item.title}
+                                    </h2>
+                                </div>
+                            </Link>
+                        );
+                    })}
+                </section>
 
                 {/* sidebar close button */}
-                <div
+                {/* <div
                     onClick={() => setShowSideBar(false)}
                     className="mx-2 md:mb-20 mb-10"
                 >
@@ -194,7 +183,7 @@ const Sidebar = () => {
                         <ArrowLeftToLine className="text-gray-950" />
                         Close
                     </Button>
-                </div>
+                </div> */}
             </main>
 
             <div
@@ -205,7 +194,7 @@ const Sidebar = () => {
 
             <div
                 onClick={() => setShowSideBar(!showSideBar)}
-                className={`w-7 h-14 bg-[#b7e7c1] transition-all duration-300 flex items-center z-[480] justify-center rounded-r-lg lg:hidden fixed left-0 top-1/2 -translate-y-1/2 ${
+                className={`w-7 h-14 bg-primary transition-all duration-300 flex items-center z-[480] justify-center rounded-r-lg lg:hidden fixed left-0 top-1/2 -translate-y-1/2 ${
                     showSideBar ? "scale-0" : "scale-100"
                 }`}
             >

@@ -51,6 +51,8 @@ const ViewProductModal = ({
                 );
             } else if (error?.response?.status == 500) {
                 toast.error("Something went wrong during an appointment");
+            }else if (error?.response?.status == 401) {
+                toast.error("your session has expired please login again");
             } else if (error) {
                 toast.error("No response received from the server!!");
             } else {

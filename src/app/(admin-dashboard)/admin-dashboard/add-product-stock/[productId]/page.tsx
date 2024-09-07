@@ -1,18 +1,7 @@
 "use client";
 import GetSingleProduct from "@/api/product/getSingleProduct";
 import UpdateProduct from "@/api/product/updateProduct";
-import Spinner from "@/app/components/Spinner/Spinner";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { GetCategory } from "@/StaticData/CategoryData/CategoryData";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -20,12 +9,7 @@ import { ImageUp } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-    Controller,
-    FieldError,
-    SubmitHandler,
-    useForm,
-} from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -271,14 +255,10 @@ const AddProductStock = ({ params }: { params: { productId: string } }) => {
                             className="min-w-[150px] w-[150px] h-[150px] rounded-md border border-primary object-cover object-center"
                         />
                     ) : (
-                        <ImageUp
-                            size={100}
-                            className="text-[#040D12]"
-                        />
+                        <ImageUp size={100} className="text-[#040D12]" />
                     )}
                 </div>
             </section>
-            
         </main>
     );
 };

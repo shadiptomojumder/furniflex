@@ -10,7 +10,8 @@ import React, {
 // Define the shape of the user object and the context value
 export interface User {
     _id: string;
-    fullname: string;
+    firstName: string;
+    lastName: string;
     email: string;
     phone?: string;
     address?: string;

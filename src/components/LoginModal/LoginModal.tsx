@@ -1,13 +1,10 @@
 "use client";
 import Login from "@/api/user/login";
-import Spinner from "@/app/components/Spinner/Spinner";
+import Spinner from "@/components/Spinner/Spinner";
 import {
     AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
-    AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
@@ -73,7 +70,7 @@ const LoginModal = ({ user, setUser }: { user: User; setUser: any }) => {
 
                 //document.cookie = `accessTokenByF=${accessToken}; expires=${expires.toUTCString()}; path=/; secure; samesite=strict`;
                 setUser(response.data.loggedInUser);
-                setModalOpen(false)
+                setModalOpen(false);
                 router.refresh();
             }
         },

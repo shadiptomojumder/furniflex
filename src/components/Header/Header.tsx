@@ -4,6 +4,7 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
+    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/useAuth";
@@ -55,6 +56,7 @@ export default function Header() {
 
     const { user, setUser, userLoading } = useAuth();
     const { cartItems } = useCart();
+console.log("user is:",user);
 
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const userId = user?._id;
@@ -144,11 +146,16 @@ export default function Header() {
                                     align="end"
                                     className="w-56 mt-4"
                                 >
+                                    <DropdownMenuItem className="py-1 font-semibold">
+                                    {user?.firstName} {user?.lastName}
+                                </DropdownMenuItem>
+                                
+                                <DropdownMenuSeparator />
                                     <DropdownMenuItem
                                         className="cursor-pointer"
                                         asChild
                                     >
-                                        <Link href="/account">Profile</Link>
+                                        <Link href="/user-dashboard/profile">Profile</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
                                         className="cursor-pointer"
@@ -180,7 +187,7 @@ export default function Header() {
                     ) : (
                         <>
                             <Link href="/login">
-                                <Button>Login</Button>
+                                <Button className="font-semibold">Login</Button>
                             </Link>
                         </>
                     )}

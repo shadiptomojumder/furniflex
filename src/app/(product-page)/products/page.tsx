@@ -12,8 +12,8 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import ProductCard from "../_components/ProductCard/ProductCard";
-import ProductCartCardLoading from "../_components/ProductCardLoading/ProductCardLoading";
+import ProductCard from "../../../components/ProductCard/ProductCard";
+import ProductCardLoading from "../../../components/ProductCardLoading/ProductCardLoading";
 
 const ProductPage = () => {
     const searchParams = useSearchParams();
@@ -55,7 +55,7 @@ const ProductPage = () => {
             setCurrentPage(newPage);
         }
     };
-    
+
     // Update URL query parameters when category or page changes
     useEffect(() => {
         const params = new URLSearchParams();
@@ -78,7 +78,7 @@ const ProductPage = () => {
                 {isLoading ? (
                     <>
                         {Array.from({ length: 6 }, (_, index) => (
-                            <ProductCartCardLoading key={index} />
+                            <ProductCardLoading key={index} />
                         ))}
                     </>
                 ) : (

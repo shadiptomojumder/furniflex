@@ -15,9 +15,7 @@ export default function MainLayout({
     return (
         <>
             <Header />
-            <main className={`bg-white py-10 relative`}>
-                <section className="md:px-5">{children}</section>
-            </main>
+            <main className="">{children}</main>
             <Footer />
         </>
     );

@@ -17,7 +17,7 @@ export default function DashboardLayout({
         <>
         <Header/>
             <main className={`bg-white py-10 relative`}>
-                <section className="md:px-5 overflow-auto min-h-[80dvh] container">
+                <section className="overflow-auto min-h-[80dvh] container">
                     <div className="flex gap-6 pb-20">
                         <Sidebar></Sidebar>
                         <div className="w-full overflow-auto border bg-white rounded-lg">

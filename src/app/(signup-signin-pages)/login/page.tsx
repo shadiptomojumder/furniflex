@@ -1,29 +1,25 @@
 "use client";
+import Login from "@/api/user/login";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/hooks/useAuth";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import AppleIcon from "/public/images/apple.png";
 import Banner from "/public/images/chairbanner.png";
 import GoogleIcon from "/public/images/google.png";
 import Logo from "/public/images/logoicon.png";
-import { useMutation } from "@tanstack/react-query";
-import Register from "@/api/user/register";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const formSchema = z.object({
-    firstName: z.string().min(2, {
-        message: "FirstName must be at least 2 characters.",
-    }),
-    lastName: z.string().min(2, {
-        message: "LastName must be at least 2 characters.",
-    }),
     email: z.string().email({
         message: "Please provide valid email.",
     }),
@@ -34,9 +30,10 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-const Signup = () => {
+const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
+    const { user, setUser, userLoading } = useAuth();
 
     const {
         register,
@@ -46,19 +43,34 @@ const Signup = () => {
     } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
     const { mutate, isPending } = useMutation({
-        mutationFn: Register,
+        mutationFn: Login,
         onSuccess: (response) => {
             if (response.statusCode === 200) {
-                toast.success("User successfully registered");
-                reset();
-                router.push("/login");
+                toast.success("User successfully Login");
+
+                localStorage.setItem(
+                    "userData",
+                    JSON.stringify(response.data.loggedInUser)
+                );
+                localStorage.setItem(
+                    "accessToken",
+                    JSON.stringify(response?.data?.accessToken)
+                );
+                localStorage.setItem(
+                    "refreshToken",
+                    JSON.stringify(response?.data?.refreshToken)
+                );
+
+                setUser(response.data.loggedInUser);
+                router.push("/");
             }
         },
         onError: (error: any) => {
-            if (error?.response?.status == 400) {
-                toast.error("Please fill all the required fild.");
-            } else if (error?.response?.status == 409) {
-                toast.warning("Username or Email already registered.");
+            if (
+                error?.response?.status == 400 ||
+                error?.response?.status == 401
+            ) {
+                toast.warning("Email or Password don't match !!");
             } else if (error.request) {
                 toast.error("No response received from the server!!");
             } else {
@@ -80,68 +92,21 @@ const Signup = () => {
             <div className="bg-white h-dvh w-[50%] flex items-center justify-center">
                 <div className="max-w-[500px] w-[500px] border-2 p-6 bg-[#FAFAFA] rounded-[8px]">
                     <div className="mb-4">
-                        <p className="text-2xl font-semibold text-black text-center mb-2">
-                            Welcome To
+                        <p className="text-[32px] font-medium text-black text-start mb-1">
+                            Welcome Back!
                         </p>
-                        <p className="text-[40px] font-bold text-center">
-                            <span className="text-black">Furni</span>
-                            <span className="text-primary">Flex</span>
+                        <p className="text-base font-medium text-[#707070]">
+                            Enter your credentials to access your account
                         </p>
-                        <p className="text-base font-medium text-[#707070] text-center">
-                            Signup for purchase your desire products
+                        <p className="text-base font-medium text-[#707070]">
+                            Try this test Credentials Or you can create an account
                         </p>
+                        <p className="text-base font-medium text-[#707070]">
+                            Gmail:jack@gmail.com , Password:123456
+                        </p>
+                        
                     </div>
                     <form className="" onSubmit={handleSubmit(onSubmit)}>
-                        <div className="flex items-start gap-[14px] mb-[14px]">
-                            {/* First name */}
-                            <div className="w-full">
-                                <div className="border-2 pl-3 pt-2 pr-3 rounded-md w-full">
-                                    <label
-                                        htmlFor="firstName"
-                                        className="text-xs text-[#707070] block mb-[2px]"
-                                    >
-                                        First name (optional)
-                                    </label>
-                                    <Input
-                                        {...register("firstName")}
-                                        id="firstName"
-                                        name="firstName"
-                                        placeholder="Enter your first name"
-                                        className="px-0 py-0 h-7 w-full border-none focus-visible:ring-0"
-                                    />
-                                </div>
-                                {errors.firstName && (
-                                    <span className="text-red-500 text-xs">
-                                        {errors.firstName.message}
-                                    </span>
-                                )}
-                            </div>
-
-                            {/* Last name */}
-                            <div className="w-full">
-                                <div className="border-2 pl-3 pt-2 pr-3 rounded-md w-full">
-                                    <label
-                                        htmlFor="lastName"
-                                        className="text-xs text-[#707070] block mb-[2px]"
-                                    >
-                                        Last name (optional)
-                                    </label>
-                                    <Input
-                                        {...register("lastName")}
-                                        id="lastName"
-                                        name="lastName"
-                                        placeholder="Enter your last name"
-                                        className="px-0 py-0 h-7 w-full border-none focus-visible:ring-0"
-                                    />
-                                </div>
-                                {errors.lastName && (
-                                    <span className="text-red-500 text-xs">
-                                        {errors.lastName.message}
-                                    </span>
-                                )}
-                            </div>
-                        </div>
-
                         {/* Email Field */}
                         <div className="mb-[14px]">
                             <div className="border-2 pl-3 pt-2 pr-3 rounded-md w-full">
@@ -197,11 +162,18 @@ const Signup = () => {
                                     )}
                                 </div>
                             </div>
-                            {errors.password && (
-                                <span className="text-red-500 text-xs">
-                                    {errors.password.message}
-                                </span>
-                            )}
+                            <div
+                                className={`flex items-center mt-1 ${errors.password ? "justify-between" : "justify-end"}`}
+                            >
+                                {errors.password && (
+                                    <span className="text-red-500 text-xs">
+                                        {errors.password.message}
+                                    </span>
+                                )}
+                                <p className="text-sm font-medium text-primary cursor-pointer hover:underline">
+                                    Forgot Password
+                                </p>
+                            </div>
                         </div>
 
                         <div className="flex items-center space-x-2 mb-5">
@@ -221,7 +193,7 @@ const Signup = () => {
                             type="submit"
                             className="w-full h-[56px] bg-black hover:bg-black text-lg font-semibold text-white"
                         >
-                            Signup
+                            Sign In
                         </Button>
                     </form>
                     <div className="w-full h-[2px] my-[22px] bg-[#F1F0F0] relative">
@@ -256,12 +228,14 @@ const Signup = () => {
                             Sign in with Apple
                         </Button>
                     </div>
+                    <Link href="/signup">
                     <p className="text-sm my-5 font-medium text-black text-center">
                         Have an account?{" "}
                         <span className="text-primary cursor-pointer">
-                            Sign In
+                            Sign Up
                         </span>
                     </p>
+                    </Link>
                 </div>
             </div>
             <div className="bg-green-300 h-dvh w-[50%] relative overflow-hidden">
@@ -294,4 +268,4 @@ const Signup = () => {
     );
 };
 
-export default Signup;
+export default LoginPage;

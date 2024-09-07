@@ -1,5 +1,5 @@
 import DeleteProducts from "@/api/product/deleteProducts";
-import Spinner from "@/app/components/Spinner/Spinner";
+import Spinner from "@/components/Spinner/Spinner";
 import {
     AlertDialog,
     AlertDialogAction,

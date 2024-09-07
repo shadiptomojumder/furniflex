@@ -1,7 +1,7 @@
 "use client";
 import GetSingleProduct from "@/api/product/getSingleProduct";
 import UpdateProduct from "@/api/product/updateProduct";
-import Spinner from "@/app/components/Spinner/Spinner";
+import Spinner from "@/components/Spinner/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,6 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { GetCategory } from "@/StaticData/CategoryData/CategoryData";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ImageUp } from "lucide-react";
@@ -51,26 +50,26 @@ type FormData = z.infer<typeof formSchema>;
 
 const CategoryList = [
     {
-        id:1,
+        id: 1,
         name: "Rocking chair",
-        value:"rocking-chair"
+        value: "rocking-chair",
     },
     {
-        id:2,
+        id: 2,
         name: "Side chair",
-        value:"side-chair"
+        value: "side-chair",
     },
     {
-        id:3,
+        id: 3,
         name: "Lounge chair",
-        value:"lounge-chair"
+        value: "lounge-chair",
     },
     {
-        id:4,
+        id: 4,
         name: "Others",
-        value:"others"
+        value: "others",
     },
-]
+];
 
 const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
     const { productId } = params;
@@ -87,8 +86,6 @@ const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
     const [productImagePreview, setProductImagePreview] = useState<
         string | null
     >(null);
-
-
 
     // Function to handle productImageChange
     const [productImageBase64, setProductImageBase64] = useState("");
@@ -115,7 +112,7 @@ const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
         reset,
     } = useForm<FormData>({ resolver: zodResolver(formSchema) });
 
-    // Mutation 
+    // Mutation
     const queryClient = useQueryClient();
     const { mutate, isPending } = useMutation({
         mutationFn: UpdateProduct,
@@ -393,9 +390,7 @@ const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
                                                                 "Product Category clicked"
                                                             )
                                                         }
-                                                        value={
-                                                            category?.value
-                                                        }
+                                                        value={category?.value}
                                                         key={category.id}
                                                     >
                                                         {category.name}

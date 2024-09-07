@@ -11,7 +11,7 @@ export const api = axios.create({
     withCredentials: true,
 });
 
-// https://lalon-store-backend-production.up.railway.app
+// https://furniflex-backend-production.up.railway.app
 // http://localhost:5000
 
 
