@@ -79,7 +79,7 @@ const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
         queryKey: ["product", productId],
         queryFn: GetSingleProduct,
     });
-    console.log("the product is:", product);
+    // console.log("the product is:", product);
 
     const router = useRouter();
     const [showModal, setShowModal] = useState<boolean>(false);
@@ -90,7 +90,7 @@ const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
     // Function to handle productImageChange
     const [productImageBase64, setProductImageBase64] = useState("");
     const productImageChange = (event: any) => {
-        console.log("The target:", event);
+        // console.log("The target:", event);
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.onloadend = (e) => {
@@ -141,7 +141,7 @@ const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
     });
 
     const onSubmit: SubmitHandler<FormData> = async (data) => {
-        console.log("Form data is:", data);
+        // console.log("Form data is:", data);
 
         // Create a copy of the data object
         const newData = { ...data };
@@ -151,11 +151,11 @@ const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
             newData.productImage = productImageBase64;
         } else {
             // Remove the field if the field is empty string
-            console.log("Come here! 123");
+            // console.log("Come here! 123");
             delete newData.productImage;
         }
 
-        console.log("The new data is:", newData);
+        // console.log("The new data is:", newData);
 
         await mutate({ productId, data: newData });
     };
@@ -386,7 +386,7 @@ const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
                                                 return (
                                                     <SelectItem
                                                         onChange={() =>
-                                                            console.log(
+                                                            // console.log(
                                                                 "Product Category clicked"
                                                             )
                                                         }

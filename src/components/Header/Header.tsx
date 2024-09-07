@@ -1,4 +1,5 @@
 "use client";
+import Logout from "@/api/user/logout";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -15,11 +16,10 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { PiHandbagSimpleBold } from "react-icons/pi";
+import { toast } from "sonner";
 import AccountImage from "../../../public/images/Account.png";
 import Logo from "../../../public/images/Logo.png";
 import { MobileNav } from "../MobileNavbar/MobileNavbar";
-import { toast } from "sonner";
-import Logout from "@/api/user/logout";
 
 const MenuItems = [
     {
@@ -51,12 +51,12 @@ const MenuItems = [
 
 export default function Header() {
     const pathname = usePathname();
-    const router = useRouter()
-    console.log("pathname: ", pathname);
+    const router = useRouter();
+    // console.log("pathname: ", pathname);
 
     const { user, setUser, userLoading } = useAuth();
     const { cartItems } = useCart();
-console.log("user is:",user);
+    // console.log("user is:", user);
 
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const userId = user?._id;
@@ -66,7 +66,7 @@ console.log("user is:",user);
         router.push("/");
         try {
             const response = await Logout({ userId });
-            console.log("The Logout Response is", response);
+            // console.log("The Logout Response is", response);
 
             if (response.statusCode === 200) {
                 toast.success("User successfully Logout");
@@ -76,7 +76,7 @@ console.log("user is:",user);
                 router.refresh();
             }
         } catch (error) {
-            console.log("The Error in Logout is:", error);
+            // console.log("The Error in Logout is:", error);
         }
     };
 
@@ -147,26 +147,20 @@ console.log("user is:",user);
                                     className="w-56 mt-4"
                                 >
                                     <DropdownMenuItem className="py-1 font-semibold">
-                                    {user?.firstName} {user?.lastName}
-                                </DropdownMenuItem>
-                                
-                                <DropdownMenuSeparator />
-                                    <DropdownMenuItem
-                                        className="cursor-pointer"
-                                        asChild
-                                    >
-                                        <Link href="/user-dashboard/profile">Profile</Link>
+                                        {user?.firstName} {user?.lastName}
                                     </DropdownMenuItem>
+
+                                    <DropdownMenuSeparator />
                                     <DropdownMenuItem
-                                        className="cursor-pointer"
+                                        className="cursor-pointer font-medium"
                                         asChild
                                     >
-                                        <Link href="/account/enrolled-courses">
-                                            My Cart
+                                        <Link href="/user-dashboard/profile">
+                                            Profile
                                         </Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem
-                                        className="cursor-pointer"
+                                        className="cursor-pointer font-medium"
                                         asChild
                                     >
                                         <Link href="/admin-dashboard/products">
@@ -175,8 +169,8 @@ console.log("user is:",user);
                                     </DropdownMenuItem>
 
                                     <DropdownMenuItem
-                                    onClick={handleLogout}
-                                        className="cursor-pointer"
+                                        onClick={handleLogout}
+                                        className="cursor-pointer font-medium"
                                         asChild
                                     >
                                         <Link href="#">Logout</Link>

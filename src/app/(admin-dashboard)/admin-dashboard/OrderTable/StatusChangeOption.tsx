@@ -42,13 +42,13 @@ const StatusChangeOption = ({
     const queryClient = useQueryClient();
 
     // const [status, setStatus] = useState<string>();
-    console.log("status is", status);
+    // console.log("status is", status);
 
     // const { mutate, isPending } = useMutation({
     //   mutationKey: [],
     //   mutationFn: UpdateAppointment,
     //   onSuccess: (response) => {
-    //     console.log("the res is ", response);
+    //     // console.log("the res is ", response);
 
     //     if (response.statusCode === 200) {
     //       toast.success("Status successfully Update");
@@ -57,7 +57,7 @@ const StatusChangeOption = ({
     //     }
     //   },
     //   onError: (error: any) => {
-    //     console.log("The Error Appointment is:", error);
+    //     // console.log("The Error Appointment is:", error);
     //     if (error?.response?.status == 409) {
     //       toast.warning(
     //         "There is already an appointment with this name and date."
@@ -74,7 +74,7 @@ const StatusChangeOption = ({
 
     const handleStatusChange = async (value: string) => {
         setStatus(value);
-        console.log("The value is:", value);
+        // console.log("The value is:", value);
         const appointmentId = product._id;
 
         // await mutate({ data: { status: value }, appointmentId });

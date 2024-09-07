@@ -44,7 +44,7 @@ interface AuthContextProviderProps {
 const AuthContextProvider: FC<AuthContextProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null);
     const [userLoading, setUserLoading] = useState(true);
-    //console.log("The state User:", user);
+    //// console.log("The state User:", user);
 
     // Load user data from localStorage on component mount
     useEffect(() => {

@@ -29,7 +29,7 @@ const ActionButton = ({ order }: { order: OrderDataType }) => {
     //   mutationKey: [],
     //   mutationFn: DeleteProducts,
     //   onSuccess: (response) => {
-    //     console.log("the res is ", response);
+    //     // console.log("the res is ", response);
 
     //     if (response.statusCode === 200) {
     //       toast.success("Product deleted successfully");
@@ -52,13 +52,13 @@ const ActionButton = ({ order }: { order: OrderDataType }) => {
     // });
 
     const handleDelete = async () => {
-        console.log("Delete Appointments", order);
-        console.log("Delete button clicked");
+        // console.log("Delete Appointments", order);
+        // console.log("Delete button clicked");
         const productIds = [`${order._id}`];
         // await mutate({ productIds });
     };
 
-    console.log("order is:", order);
+    // console.log("order is:", order);
 
     return (
         <>

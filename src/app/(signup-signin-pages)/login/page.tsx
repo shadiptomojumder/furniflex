@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -17,7 +18,6 @@ import AppleIcon from "/public/images/apple.png";
 import Banner from "/public/images/chairbanner.png";
 import GoogleIcon from "/public/images/google.png";
 import Logo from "/public/images/logoicon.png";
-import Link from "next/link";
 
 const formSchema = z.object({
     email: z.string().email({
@@ -83,7 +83,7 @@ const LoginPage = () => {
     });
 
     const onSubmit: SubmitHandler<FormData> = async (data) => {
-        console.log("The data:", data);
+        // console.log("The data:", data);
         await mutate(data);
     };
 
@@ -99,12 +99,12 @@ const LoginPage = () => {
                             Enter your credentials to access your account
                         </p>
                         <p className="text-base font-medium text-[#707070]">
-                            Try this test Credentials Or you can create an account
+                            Try this test Credentials Or you can create an
+                            account
                         </p>
                         <p className="text-base font-medium text-[#707070]">
                             Gmail:jack@gmail.com , Password:123456
                         </p>
-                        
                     </div>
                     <form className="" onSubmit={handleSubmit(onSubmit)}>
                         {/* Email Field */}
@@ -229,12 +229,12 @@ const LoginPage = () => {
                         </Button>
                     </div>
                     <Link href="/signup">
-                    <p className="text-sm my-5 font-medium text-black text-center">
-                        Have an account?{" "}
-                        <span className="text-primary cursor-pointer">
-                            Sign Up
-                        </span>
-                    </p>
+                        <p className="text-sm my-5 font-medium text-black text-center">
+                            Have an account?{" "}
+                            <span className="text-primary cursor-pointer">
+                                Sign Up
+                            </span>
+                        </p>
                     </Link>
                 </div>
             </div>

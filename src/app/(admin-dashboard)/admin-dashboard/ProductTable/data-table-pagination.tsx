@@ -39,7 +39,7 @@ export function DataTablePagination<TData>({
     table,
 }: DataTablePaginationProps<TData>) {
     const selectedRows = table.getFilteredSelectedRowModel().rows;
-    // console.log("selected rows: ", selectedRows);
+    // // console.log("selected rows: ", selectedRows);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] =
         useState<boolean>(false);
     const productIds = selectedRows.map((product: any) => {
@@ -47,13 +47,13 @@ export function DataTablePagination<TData>({
         return productId;
     });
 
-    // console.log("selectedAppointmentIds", selectedAppointmentIds);
+    // // console.log("selectedAppointmentIds", selectedAppointmentIds);
     const queryClient = useQueryClient();
     const { mutate, isPending } = useMutation({
         mutationKey: [],
         mutationFn: DeleteProducts,
         onSuccess: (response) => {
-            console.log("the res is ", response);
+            // console.log("the res is ", response);
 
             if (response.statusCode === 200) {
                 selectedRows.forEach((row) => {
@@ -65,7 +65,7 @@ export function DataTablePagination<TData>({
             }
         },
         onError: (error: any) => {
-            console.log("The Error Appointment is:", error);
+            // console.log("The Error Appointment is:", error);
             if (error?.response?.status == 400) {
                 toast.warning("Nothing selected!");
             } else if (error?.response?.status == 500) {

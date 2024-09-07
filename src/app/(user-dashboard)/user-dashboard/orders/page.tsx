@@ -24,7 +24,7 @@ const UserDashboardOrders = () => {
         queryFn: GetAllOrder,
     });
 
-    console.log("ordertlist is :", ordertlist);
+    // console.log("ordertlist is :", ordertlist);
 
     return (
         <main>
@@ -156,7 +156,9 @@ const UserDashboardOrders = () => {
                     </>
                 ) : (
                     <div>
-                        <p className="text-lg font-semibold text-center">No order history</p>
+                        <p className="text-lg font-semibold text-center">
+                            No order history
+                        </p>
                     </div>
                 )}
             </Accordion>

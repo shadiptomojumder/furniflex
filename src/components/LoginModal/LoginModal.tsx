@@ -46,7 +46,7 @@ const LoginModal = ({ user, setUser }: { user: User; setUser: any }) => {
     const { mutate, isPending } = useMutation({
         mutationFn: Login,
         onSuccess: (response) => {
-            console.log("response", response);
+            // console.log("response", response);
 
             if (response.statusCode === 200) {
                 toast.success("User successfully Login");

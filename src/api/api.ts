@@ -1,5 +1,6 @@
 import axios from "axios";
-export const BaseURL = "https://furniflex-backend-production.up.railway.app/api";
+export const BaseURL =
+    "https://furniflex-backend-production.up.railway.app/api";
 
 export const api = axios.create({
     baseURL: BaseURL,
@@ -13,7 +14,6 @@ export const api = axios.create({
 
 // https://furniflex-backend-production.up.railway.app
 // http://localhost:5000
-
 
 // Add a request interceptor
 api.interceptors.request.use(
@@ -42,13 +42,13 @@ const Parse = (token: any) => {
 api.interceptors.response.use(
     (response) => response, // Directly return successful responses.
     async (error) => {
-        //console.log("The error line 40 is:", error);
+        //// console.log("The error line 40 is:", error);
         const originalRequest = error.config;
         if (error.response.status === 420 && !originalRequest._retry) {
             originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
             try {
                 const refreshToken = localStorage.getItem("refreshToken"); // Get the refresh token as a string
-                console.log("Refresh Token localestorage:", refreshToken);
+                // console.log("Refresh Token localestorage:", refreshToken);
 
                 if (refreshToken) {
                     // Make a request to your auth server to refresh the token.
@@ -59,13 +59,13 @@ api.interceptors.response.use(
                         },
                         { withCredentials: true }
                     );
-                    console.log("Response after Refreshing:", response);
+                    // console.log("Response after Refreshing:", response);
 
                     const { accessToken } = response.data.data;
 
                     // Store the new access and refresh tokens.
                     localStorage.setItem("accessToken", accessToken);
-                    console.log("New Access Token:", accessToken);
+                    // console.log("New Access Token:", accessToken);
 
                     // Update the authorization header with the new access token.
                     api.defaults.headers.common["Authorization"] =
@@ -75,7 +75,7 @@ api.interceptors.response.use(
                 }
             } catch (refreshError) {
                 // Handle refresh token errors by clearing stored tokens and redirecting to the login page.
-                console.log("Token refresh failed:", refreshError);
+                // console.log("Token refresh failed:", refreshError);
                 localStorage.clear();
                 window.location.href = "/login";
                 return Promise.reject(refreshError);

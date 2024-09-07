@@ -22,7 +22,7 @@ const CartPage = () => {
     } = useCart();
     const { user } = useAuth();
 
-    console.log("cartItems is:", cartItems);
+    // console.log("cartItems is:", cartItems);
 
     const calculateTotal = () => {
         const total = cartItems.reduce((accumulator, item) => {
@@ -50,13 +50,13 @@ const CartPage = () => {
         setProductList(updatedProductList);
     }, [cartItems]);
 
-    console.log("productList is:", productList);
+    // console.log("productList is:", productList);
 
     const { mutate, isPending } = useMutation({
         mutationKey: [],
         mutationFn: PaymentInit,
         onSuccess: (response) => {
-            console.log("payment success", response);
+            // console.log("payment success", response);
 
             if (response.statusCode === 200) {
                 // toast.success("Status successfully Update");
@@ -66,7 +66,7 @@ const CartPage = () => {
             }
         },
         onError: (error: any) => {
-            console.log("The payment error is:", error);
+            // console.log("The payment error is:", error);
             if (error?.response?.status == 409) {
                 toast.warning("Something went wrong");
             } else if (error?.response?.status == 500) {
@@ -93,7 +93,7 @@ const CartPage = () => {
             totalAmmount: `${totalAmmount}`,
         };
 
-        console.log("productData is:", productData);
+        // console.log("productData is:", productData);
 
         await mutate(productData);
     };

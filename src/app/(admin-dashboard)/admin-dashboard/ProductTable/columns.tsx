@@ -1,6 +1,5 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ColumnDef } from "@tanstack/react-table";
 import ActionButton from "./ActionButton";
@@ -126,7 +125,9 @@ export const columns: ColumnDef<ProductDataType>[] = [
             <DataTableColumnHeader column={column} title="Stock" />
         ),
         cell: ({ row }) => (
-            <div className="capitalize font-bold text-center">{row.getValue("productStock")}</div>
+            <div className="capitalize font-bold text-center">
+                {row.getValue("productStock")}
+            </div>
         ),
     },
     // {
@@ -137,7 +138,7 @@ export const columns: ColumnDef<ProductDataType>[] = [
     //     ),
     //     cell: ({ row }) => {
     //         const productStock = row.getValue("productStock") as number;
-    //         console.log("status", productStock);
+    //         // console.log("status", productStock);
 
     //         return (
     //             <>
@@ -167,7 +168,7 @@ export const columns: ColumnDef<ProductDataType>[] = [
         enableHiding: false,
         cell: ({ row }) => {
             const product = row.original;
-            // console.log("Apointment", apoointment);
+            // // console.log("Apointment", apoointment);
 
             return <ActionButton product={product} />;
         },

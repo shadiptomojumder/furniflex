@@ -1,19 +1,17 @@
 "use client";
 import GetAllProducts from "@/api/product/getAllProducts";
 import { useQuery } from "@tanstack/react-query";
-import { DataTable } from "../ProductTable/data-table";
-import { columns } from "../ProductTable/columns";
 import { ProductTableLoading } from "../../DashboardComponents/ProductTableLoading/ProductTableLoading";
+import { columns } from "../ProductTable/columns";
+import { DataTable } from "../ProductTable/data-table";
 
 const DashboardProductsPage = () => {
-
-
     const { isLoading, data: productlist } = useQuery({
-        queryKey: ["productlist", "","newest",],
+        queryKey: ["productlist", "", "newest"],
         queryFn: GetAllProducts,
     });
 
-    console.log("productlist is :", productlist);
+    // // console.log("productlist is :", productlist);
 
     return (
         <>

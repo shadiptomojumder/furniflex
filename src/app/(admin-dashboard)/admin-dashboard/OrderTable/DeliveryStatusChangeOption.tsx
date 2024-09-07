@@ -20,7 +20,7 @@ const DeliveryStatusChangeOption = ({
     deliveryStatus: string;
     setDeliveryStatus: (status: string) => void;
 }) => {
-    console.log("deliveryStatus is", deliveryStatus);
+    // console.log("deliveryStatus is", deliveryStatus);
 
     const handleStatusChange = async (value: string) => {
         setDeliveryStatus(value);

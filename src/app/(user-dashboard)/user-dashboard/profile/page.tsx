@@ -41,18 +41,18 @@ type FormData = z.infer<typeof formSchema>;
 const UserDashboardProfile = () => {
     const router = useRouter();
     const { user, setUser, userLoading } = useAuth();
-    // console.log("The user is:", user);
+    // // console.log("The user is:", user);
 
     const [isTouched, setIsTouched] = useState<boolean>(false);
-    // console.log("isTouched :",isTouched);
+    // // console.log("isTouched :",isTouched);
 
     const [previewImage, setPreviewImage] = useState<string | null>(null);
-    console.log("previewImage", previewImage);
+    // console.log("previewImage", previewImage);
 
     const [avatarBase64, setAvatarBase64] = useState("");
     // Function to handle logo change
     const handleAvatarImageChange = (event: any) => {
-        console.log("Here 51");
+        // console.log("Here 51");
 
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -88,7 +88,7 @@ const UserDashboardProfile = () => {
     const { mutate, isPending } = useMutation({
         mutationFn: UpdateUser,
         onSuccess: (response) => {
-            console.log("response is", response);
+            // console.log("response is", response);
 
             if (response.statusCode === 200) {
                 toast.success("User successfully updated");
@@ -113,21 +113,21 @@ const UserDashboardProfile = () => {
     });
 
     const onSubmit: SubmitHandler<FormData> = async (data) => {
-        console.log("The old data is:", data);
-        console.log("The avatarBase64 is:", avatarBase64);
+        // console.log("The old data is:", data);
+        // console.log("The avatarBase64 is:", avatarBase64);
         // Create a copy of the data object
         const newData = { ...data };
 
         // Conditionally add the avatar property if avatarBase64 is not an empty string
         if (avatarBase64 !== undefined && avatarBase64 !== "") {
             newData.avatar = avatarBase64;
-            console.log("Come here!");
+            // console.log("Come here!");
         } else {
             // Remove avatar field if avatarBase64 is empty string
-            console.log("Come here! 123");
+            // console.log("Come here! 123");
             delete newData.avatar;
         }
-        console.log("The new data is:", newData);
+        // console.log("The new data is:", newData);
 
         if (user && user._id) {
             await mutate({ data: newData, userId: user._id?.toString() });
@@ -146,7 +146,7 @@ const UserDashboardProfile = () => {
                 setValue("phone", user?.phone?.toString());
             }
             if (user?.avatar) {
-                console.log("Avatar is:", user?.avatar);
+                // console.log("Avatar is:", user?.avatar);
 
                 setPreviewImage(user?.avatar as string);
             }

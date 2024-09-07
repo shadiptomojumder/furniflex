@@ -1,19 +1,12 @@
 "use client";
 
 import UpdateUser from "@/api/user/updateUser";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAuth } from "@/hooks/useAuth";
 import { useMutation } from "@tanstack/react-query";
-import {
-    ArrowLeftToLine,
-    LayoutList,
-    Pencil,
-    UserCog,
-    UserRound,
-} from "lucide-react";
+import { LayoutList, Pencil, UserCog, UserRound } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -39,16 +32,16 @@ const QuickLinks = [
 const Sidebar = () => {
     const pathname = usePathname();
     const [showSideBar, setShowSideBar] = useState<boolean>(false);
-    // console.log("showSideBar",showSideBar);
+    // // console.log("showSideBar",showSideBar);
     const { user, setUser, userLoading } = useAuth();
 
     const [previewImage, setPreviewImage] = useState<string | null>(null);
-    console.log("previewImage", previewImage);
+    // console.log("previewImage", previewImage);
 
     const { mutate, isPending } = useMutation({
         mutationFn: UpdateUser,
         onSuccess: (response) => {
-            console.log("response is", response);
+            // console.log("response is", response);
 
             if (response.statusCode === 200) {
                 toast.success("User avatar successfully updated");
@@ -75,7 +68,7 @@ const Sidebar = () => {
 
     // Function to handle logo change
     const handleAvatarImageChange = (event: any) => {
-        console.log("Here 51");
+        // console.log("Here 51");
 
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -90,8 +83,8 @@ const Sidebar = () => {
     };
 
     const updatedAvatar = (avatarBase64: string) => {
-        console.log("previewImage", previewImage);
-        console.log("avatarBase64", avatarBase64);
+        // console.log("previewImage", previewImage);
+        // console.log("avatarBase64", avatarBase64);
 
         if (avatarBase64) {
             mutate({
@@ -151,7 +144,7 @@ const Sidebar = () => {
                             htmlFor="avataro"
                             className="p-[5px] absolute top-3 cursor-pointer right-1 h-[28px] w-[28px] bg-slate-200 rounded-full flex items-center justify-center"
                         >
-                            <Pencil className="text-primary"/>
+                            <Pencil className="text-primary" />
                         </Label>
                     </div>
                     <Input
@@ -248,7 +241,7 @@ const Sidebar = () => {
                             htmlFor="avataro"
                             className="p-[5px] absolute top-3 cursor-pointer right-1 h-[28px] w-[28px] bg-slate-200 rounded-full flex items-center justify-center"
                         >
-                            <Pencil className="text-primary"/>
+                            <Pencil className="text-primary" />
                         </Label>
                     </div>
                     <Input

@@ -1,22 +1,22 @@
 "use client";
+import Register from "@/api/user/register";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import AppleIcon from "/public/images/apple.png";
 import Banner from "/public/images/chairbanner.png";
 import GoogleIcon from "/public/images/google.png";
 import Logo from "/public/images/logoicon.png";
-import { useMutation } from "@tanstack/react-query";
-import Register from "@/api/user/register";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 const formSchema = z.object({
     firstName: z.string().min(2, {
@@ -72,7 +72,7 @@ const Signup = () => {
     });
 
     const onSubmit: SubmitHandler<FormData> = async (data) => {
-        console.log("The data:", data);
+        // console.log("The data:", data);
         await mutate(data);
     };
 
@@ -258,12 +258,12 @@ const Signup = () => {
                         </Button>
                     </div>
                     <Link href="/login">
-                    <p className="text-sm my-5 font-medium text-black text-center">
-                        Have an account?{" "}
-                        <span className="text-primary cursor-pointer">
-                            Sign In
-                        </span>
-                    </p>
+                        <p className="text-sm my-5 font-medium text-black text-center">
+                            Have an account?{" "}
+                            <span className="text-primary cursor-pointer">
+                                Sign In
+                            </span>
+                        </p>
                     </Link>
                 </div>
             </div>

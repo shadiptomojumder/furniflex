@@ -45,7 +45,7 @@ const ViewOrderModal = ({
             }
         },
         onError: (error: any) => {
-            console.log("The Error UpdateOrder is:", error);
+            // console.log("The Error UpdateOrder is:", error);
             if (error?.response?.status == 500) {
                 toast.error("Something went wrong during an UpdateOrder");
             } else if (error) {
@@ -59,7 +59,7 @@ const ViewOrderModal = ({
         },
     });
 
-    console.log("orderData is:", orderData);
+    // console.log("orderData is:", orderData);
 
     const handleChanges = async () => {
         const orderId = orderData?._id;
@@ -82,7 +82,7 @@ const ViewOrderModal = ({
                     {orderData.productList &&
                         orderData.productList.length > 0 &&
                         orderData.productList.map((product, index) => {
-                            console.log("product is:", product);
+                            // console.log("product is:", product);
 
                             return (
                                 <div

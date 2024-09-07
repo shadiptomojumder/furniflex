@@ -31,7 +31,7 @@ const ViewProductModal = ({
     };
     const [isTouched, setIsTouched] = useState<boolean>(false);
     const [stock, setStock] = useState<number>(productData?.productStock);
-    console.log("changeedStatus", stock);
+    // console.log("changeedStatus", stock);
 
     const { mutate, isPending } = useMutation({
         mutationKey: [],
@@ -44,14 +44,14 @@ const ViewProductModal = ({
             }
         },
         onError: (error: any) => {
-            console.log("The Error Appointment is:", error);
+            // console.log("The Error Appointment is:", error);
             if (error?.response?.status == 409) {
                 toast.warning(
                     "There is already an appointment with this name and date."
                 );
             } else if (error?.response?.status == 500) {
                 toast.error("Something went wrong during an appointment");
-            }else if (error?.response?.status == 401) {
+            } else if (error?.response?.status == 401) {
                 toast.error("your session has expired please login again");
             } else if (error) {
                 toast.error("No response received from the server!!");

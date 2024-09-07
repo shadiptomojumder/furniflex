@@ -11,7 +11,7 @@ const DashboardOrdersPage = () => {
         queryFn: GetAllOrder,
     });
 
-    console.log("ordertlist is :", ordertlist);
+    // console.log("ordertlist is :", ordertlist);
 
     return (
         <>

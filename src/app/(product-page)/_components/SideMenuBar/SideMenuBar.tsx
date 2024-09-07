@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -32,9 +32,9 @@ const SideMenuBar = () => {
     const searchPrams = useSearchParams();
     const category = searchPrams.get("category") || "";
 
-    // console.log("pathname is", pathname);
-    // console.log("sortByText is", categoryQuery);
-    // console.log("category is", category);
+    // // console.log("pathname is", pathname);
+    // // console.log("sortByText is", categoryQuery);
+    // // console.log("category is", category);
 
     useEffect(() => {
         if (categoryQuery === "") {
@@ -48,16 +48,20 @@ const SideMenuBar = () => {
         <section className="bg-white pr-8 pt-10 border-r sm:block hidden">
             <div className="flex flex-col gap-4">
                 {FilterItems.map((item: any, index: number) => {
-                    const isActive = item?.filter === category
+                    const isActive = item?.filter === category;
                     return (
-                        <div onClick={() => setCategoryQuery(item?.filter)} key={index} className="border-b pb-3 last:border-b-0 min-w-[231px] cursor-pointer">
                         <div
-                            className={`w-full ${isActive ? "text-white bg-[#0E0E0E]":"text-[#717171] bg-white"} px-6 py-2 text-[22px]  font-semibold text-nowrap rounded-md transition-all`}
+                            onClick={() => setCategoryQuery(item?.filter)}
+                            key={index}
+                            className="border-b pb-3 last:border-b-0 min-w-[231px] cursor-pointer"
                         >
-                            {item?.title}
+                            <div
+                                className={`w-full ${isActive ? "text-white bg-[#0E0E0E]" : "text-[#717171] bg-white"} px-6 py-2 text-[22px]  font-semibold text-nowrap rounded-md transition-all`}
+                            >
+                                {item?.title}
+                            </div>
                         </div>
-                    </div>
-                    )
+                    );
                 })}
             </div>
         </section>

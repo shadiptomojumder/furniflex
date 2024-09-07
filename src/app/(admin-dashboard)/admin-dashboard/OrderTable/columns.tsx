@@ -167,19 +167,19 @@ export const columns: ColumnDef<OrderDataType>[] = [
                     )}
                     {status === "inprogress" && (
                         <Badge
-                        variant="default"
-                        className="bg-yellow-600 hover:bg-yellow-600 cursor-pointer uppercase"
-                    >
-                        inprogress
-                    </Badge>
+                            variant="default"
+                            className="bg-yellow-600 hover:bg-yellow-600 cursor-pointer uppercase"
+                        >
+                            inprogress
+                        </Badge>
                     )}
                     {status === "done" && (
                         <Badge
-                        variant="default"
-                        className="bg-[#a6d296] hover:bg-[#a6d296] cursor-pointer uppercase"
-                    >
-                        done
-                    </Badge>
+                            variant="default"
+                            className="bg-[#a6d296] hover:bg-[#a6d296] cursor-pointer uppercase"
+                        >
+                            done
+                        </Badge>
                     )}
                     {status === "failed" && (
                         <Badge variant="destructive">
@@ -202,7 +202,7 @@ export const columns: ColumnDef<OrderDataType>[] = [
         cell: ({ row }) => {
             const productData = row.getValue("productList");
             //const productList = ['66867f3eb7ee85e7f02be42e', '66867e48b7ee85e7f02be410'];
-            console.log("productList:", productData);
+            // console.log("productList:", productData);
 
             return (
                 <>
@@ -238,7 +238,7 @@ export const columns: ColumnDef<OrderDataType>[] = [
         enableHiding: false,
         cell: ({ row }) => {
             const order = row.original;
-            // console.log("Apointment", apoointment);
+            // // console.log("Apointment", apoointment);
 
             return <ActionButton order={order} />;
         },

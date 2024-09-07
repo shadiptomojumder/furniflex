@@ -30,7 +30,7 @@ const ActionButton = ({ product }: { product: ProductDataType }) => {
         mutationKey: [],
         mutationFn: DeleteProducts,
         onSuccess: (response) => {
-            console.log("the res is ", response);
+            // console.log("the res is ", response);
 
             if (response.statusCode === 200) {
                 toast.success("Product deleted successfully");
@@ -54,18 +54,18 @@ const ActionButton = ({ product }: { product: ProductDataType }) => {
     });
 
     const handleDelete = async () => {
-        console.log("Delete Appointments", product);
-        console.log("Delete button clicked");
+        // console.log("Delete Appointments", product);
+        // console.log("Delete button clicked");
         const productIds = [`${product._id}`];
         await mutate({ productIds });
     };
 
     const handleEditProduct = () => {
-        console.log("Edit Product clicked", product?.productName);
+        // console.log("Edit Product clicked", product?.productName);
         router.push(`/admin-dashboard/update-product/${product?._id}`);
     };
     const handleAddProductStock = () => {
-        console.log("Edit Product clicked", product?.productName);
+        // console.log("Edit Product clicked", product?.productName);
         router.push(`/admin-dashboard/add-product-stock/${product?._id}`);
     };
 

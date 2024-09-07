@@ -89,7 +89,7 @@ const CreateProductPage = () => {
     // Function to handle productImageChange
     const [productImageBase64, setProductImageBase64] = useState("");
     const productImageChange = (event: any) => {
-        console.log("The target:", event);
+        // console.log("The target:", event);
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.onloadend = (e) => {
@@ -138,7 +138,7 @@ const CreateProductPage = () => {
     });
 
     const onSubmit: SubmitHandler<FormData> = async (data) => {
-        console.log("Form data is:", data);
+        // console.log("Form data is:", data);
 
         // Create a copy of the data object
         const newData = { ...data };
@@ -148,11 +148,11 @@ const CreateProductPage = () => {
             newData.productImage = productImageBase64;
         } else {
             // Remove the field if the field is empty string
-            console.log("Come here! 123");
+            // console.log("Come here! 123");
             delete newData.productImage;
         }
 
-        console.log("The new data is:", newData);
+        // console.log("The new data is:", newData);
 
         await mutate(newData);
     };
