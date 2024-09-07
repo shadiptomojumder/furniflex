@@ -385,11 +385,6 @@ const UpdateProductPage = ({ params }: { params: { productId: string } }) => {
                                             CategoryList.map((category) => {
                                                 return (
                                                     <SelectItem
-                                                        onChange={() =>
-                                                            // console.log(
-                                                                "Product Category clicked"
-                                                            )
-                                                        }
                                                         value={category?.value}
                                                         key={category.id}
                                                     >
