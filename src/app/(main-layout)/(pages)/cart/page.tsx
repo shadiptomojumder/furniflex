@@ -32,7 +32,7 @@ const CartPage = () => {
         return total;
     };
 
-    const fullname = user?.firstName+""+user?.lastName
+    const fullname = user?.firstName + " " + user?.lastName;
     const totalAmmount = calculateTotal();
     const [productList, setProductList] = useState<object[]>([]);
     const [orderData, setOrderData] = useState();
@@ -52,9 +52,6 @@ const CartPage = () => {
 
     console.log("productList is:", productList);
 
-
-
-
     const { mutate, isPending } = useMutation({
         mutationKey: [],
         mutationFn: PaymentInit,
@@ -71,9 +68,7 @@ const CartPage = () => {
         onError: (error: any) => {
             console.log("The payment error is:", error);
             if (error?.response?.status == 409) {
-                toast.warning(
-                    "Something went wrong"
-                );
+                toast.warning("Something went wrong");
             } else if (error?.response?.status == 500) {
                 toast.error("Something went wrong");
             } else if (error.request) {
@@ -102,9 +97,6 @@ const CartPage = () => {
 
         await mutate(productData);
     };
-
-
-
 
     return (
         <main className="py-10">
@@ -189,7 +181,12 @@ const CartPage = () => {
                             </p>
                         </div>
                     </div>
-                    <Button onClick={handleCheckout} className="text-[17px] bg-black hover:bg-black font-medium text-white mt-6 w-full h-[56px]">Go to Checkout</Button>
+                    <Button
+                        onClick={handleCheckout}
+                        className="text-[17px] bg-black hover:bg-black font-medium text-white mt-6 w-full h-[56px]"
+                    >
+                        Go to Checkout
+                    </Button>
                 </div>
             </section>
         </main>

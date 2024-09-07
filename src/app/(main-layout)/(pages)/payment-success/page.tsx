@@ -1,23 +1,14 @@
-"use client"
-import { useEffect } from "react";
-import Cookies from "js-cookie";
+"use client";
 import { useCart } from "@/hooks/useCart";
+import { useEffect } from "react";
 
 const PaymentSuccess = () => {
-    const {
-        cartItems,
-        addToCart,
-        removeFromCart,
-        updateCartItem,
-        clearCart,
-        isLoading,
-    } = useCart();
-    useEffect(()=> {
-        clearCart()
+    const { clearCart } = useCart();
+    useEffect(() => {
+        clearCart();
 
-        localStorage.removeItem("cartItems")
-
-    },[])
+        localStorage.removeItem("cartItems");
+    }, []);
     return (
         <div className="p-2 container h-[70dvh]">
             <div className="pt-28">
