@@ -68,9 +68,9 @@ const CartPage = () => {
         onError: (error: any) => {
             // console.log("The payment error is:", error);
             if (error?.response?.status == 409) {
-                toast.warning("Something went wrong");
-            } else if (error?.response?.status == 500) {
                 toast.error("Something went wrong");
+            } else if (error?.response?.status == 500) {
+                toast.warning("You need to login for checkout!");
             } else if (error.request) {
                 toast.error("No response received from the server!!");
             } else {
